@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var prompt = require('prompt');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -6,10 +7,9 @@ var connection = mysql.createConnection({
     database: 'zoo_db'
 });
 
-var prompt = require('prompt');
+
 prompt.start();
 var prompt.message = "";
-
 connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
@@ -21,28 +21,32 @@ connection.connect(function(err) {
 var zoo = {
   welcome : function(){
     console.log("Welcome to the Zoo and Friends App!")
-  };
+  },
   menu :function(){
     console.log("Pressing 'A' will : Add a new animal to the Zoo!")
     console.log("Pressing 'U' will : Update info on an animal to the Zoo!")
     console.log("Pressing 'V' will : Visit the animals in the Zoo!")
     console.log("Pressing 'D' will : Adopt an animal from the Zoo!")
     console.log("Pressing 'Q' will : Quit and exit the Zoo!")
-  };
+  },
 
   add : function(input_scope){
     var currentScope = input_scope
-    var query = 'INSERT INTO zoo_db(name, type, age) VALUES (?,?,?)'
     console.log("To add an animal to the zoo please fill out the following form for us!")
     prompt.get(["->", "name", "type", "age"], function(err, result){
-      prompt.get(){
-        connection.query(query, )
-      }
-    })
+     var query = 'INSERT INTO animals (name, type, age) VALUES (?,?,?)';
+     var addThis = [result.name, result.type, result.age];
+
+     connection.query(query, addThis, function(err, result){
+      if (err) throw err;
+
+      console.log("Added" + result.name + "to the zoo.");
+     });
+    });
 
     currentScope.menu();
     currentScope.promptUser();
-  };
+  },
 
   visit : function(){
     console.log(" Enter (I): ------> do you know the animal by it's id? We will visit that animal!")
@@ -53,7 +57,7 @@ var zoo = {
     console.log(" Enter (Q): ------> Quits to the main menu!")
     currentScope.visit();
     currentScope.view(currentScope);
-  };
+  },
 
   view : function(){
     var currentScope = input_scope
@@ -83,67 +87,82 @@ var zoo = {
           currentScope.view(currentScope);
       };
     })
-  };
+  },
 
   type : function(input_scope){
     var currentScope = input_scope;
     console.log("Enter animal type to find out how man animals we have of that type!")
     prompt.get(["->", "animal_type"], function(err, result){
-     connection.query()
-    })
-    currentScope.menu();
-    currentScope.promptUser();
-  };
+      var query = "SELECT COUNT(type) FROM animals WHERE type =?"
+      var addThis = result.animal_type;
+     connection.query(query, addThis, function(err, result){
+      if (err) throw err;
+      console.log(result)
+      currentScope.menu();
+      currentScope.promptUser();
+     })
+    }); 
+  },
 
   care : function(input_scope){
     var currentScope = input_scope;
     console.log("Enter city name: NY/SF?")
     prompt.get(["->", "city_name"], function(err, result){
-      connection.query
-    })
-  };
+      var query = "SELECT COUNT(*) FROM animals, caretakers WHERE caretakers.city=? AND caretakers.id=animals.caretaker_id"
+      var addThis = result.city_name;
+      connection.query(query, addThis, function(err, result){
+        if (err) throw err;
+        console.log(result);
+        currentScope.visit();
+      }):
+    }):
+  },
 
   animID : function(input_scope){
     var currentScope = input_scope;
     prompt.get(["->", "animal_id"], function(err, result){
       connection.query()
     })
-  };
+  },
 
   name : function(input_scope){
     var currentScope = input_scope;
     prompt.get(["->", "name"], function(err, result){
       connection.query()
     })
-  };
+  },
 
   all : function(input_scope){
     var currentScope = input_scope;
     prompt.get(["->", "all"], function(err, result){
       connection.query()
     })
-  };
+  },
 
   update : function(input_scope){
     var currentScope = input_scope;
     prompt.get(['->', 'id', 'new_name', 'new_age', 'new_type', 'new_caretaker_id'], function(err, result){
-      connection.query();
-      currentScope.menu();
-      currentScope.promptUser();
-    })
-  };
+      connection.query(query, addThis, function(err, result){
+        if(err) throw err;
+        currentScope.menu();
+        currentScope.promptUser();
+      });
+    });
+  },
 
   adopt : function(input_scope){
     var currentScope = input_scope;
-      prompt.get(['->', 'animal_id'], function(err, result){
-      prompt.get(){
-        connection.query()
+    prompt.get(['->', 'animal_id'], function(err, result){
+      var query = "DELETE FROM animals WHERE id=?"
+      var addThis = result.animal_id;
+      connection.query(query, addThis, function(err, result){
+        if (err) throw err;
+        console.log(result);
         currentScope.visit();
         currentScope.view(currentScope);
-      }
-    })
-  };
-
+      });
+    });
+  },
   promptUser : function(){
     var self = this;
     prompt.get("input", function(err, result){
@@ -163,20 +182,19 @@ var zoo = {
       else{
         console.log("Sorry, didn't get that.  Come again?")
       }
-    })
-  }
+    });
+  },
 
   exit : function(){
     console.log("Thanks for visiting us.  Good Bye!")
     process.exit();
-  };
+  },
 
   open : function(){
     this.welcome();
     this.menu();
     this.promptUser();
-  };
-
+  }
 };
 
 zoo.open();
