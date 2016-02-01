@@ -1,0 +1,29 @@
+{
+  "name": "zoo_project",
+  "version": "1.0.0",
+  "description": "zoos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cbmoate/zoo.git"
+  },
+  "keywords": [
+    "back-end",
+    "RBC",
+    "class",
+    "project"
+  ],
+  "author": "CB Moate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cbmoate/zoo/issues"
+  },
+  "homepage": "https://github.com/Cbmoate/zoo#readme",
+  "dependencies": {
+    "mysql": "^2.10.2",
+    "prompt": "^0.2.14"
+  }
+}
