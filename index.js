@@ -7,9 +7,8 @@ var connection = mysql.createConnection({
 });
 
 var prompt = require('prompt');
-
 prompt.start();
-prompt.message = ""
+var prompt.message = "";
 
 connection.connect(function(err) {
   if (err) {
@@ -33,10 +32,11 @@ var zoo = {
 
   add : function(input_scope){
     var currentScope = input_scope
+    var query = 'INSERT INTO zoo_db(name, type, age) VALUES (?,?,?)'
     console.log("To add an animal to the zoo please fill out the following form for us!")
     prompt.get(["->", "name", "type", "age"], function(err, result){
       prompt.get(){
-        connection.query()
+        connection.query(query, )
       }
     })
 
@@ -61,20 +61,28 @@ var zoo = {
     prompt.get(["->", "visit"], function(err, result){
       if(result.vist == "Q"){
         currentScope.menu();
-      }
-      else if( result.visit == ){}
-      else if( result.visit == ){}
-      else if( result.visit == ){}
-      else if( result.visit == ){}
-      else if( result.visit == ){}
+      };
+      else if( result.visit =="O"){
+        currentScope.type(input_scope);
+      };
+      else if( result.visit =="I" ){
+        currentScope.type(input_scope);
+      };
+      else if( result.visit == "N" ){
+        currentScope.name(input_scope;)
+      };
+      else if( result.visit == "A" ){
+        currentScope.all(input_scope);
+      };
+      else if( result.visit == "C"){
+        currentScope.care(input_scope);
+      };
       else{
         console.log("Sorry, didn't get that.  Come again?")
-      }
-
-
+          currentScope.visit();
+          currentScope.view(currentScope);
+      };
     })
-    currentScope.visit();
-    currentScope.view(currentScope);
   };
 
   type : function(input_scope){
@@ -127,7 +135,7 @@ var zoo = {
 
   adopt : function(input_scope){
     var currentScope = input_scope;
-    prompt.get(['->', 'animal_id'], function(err, result){
+      prompt.get(['->', 'animal_id'], function(err, result){
       prompt.get(){
         connection.query()
         currentScope.visit();
