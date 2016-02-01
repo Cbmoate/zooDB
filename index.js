@@ -23,11 +23,11 @@ var zoo = {
     console.log("Welcome to the Zoo and Friends App!")
   },
   menu :function(){
-    console.log("Pressing 'A' will : Add a new animal to the Zoo!")
-    console.log("Pressing 'U' will : Update info on an animal to the Zoo!")
-    console.log("Pressing 'V' will : Visit the animals in the Zoo!")
-    console.log("Pressing 'D' will : Adopt an animal from the Zoo!")
-    console.log("Pressing 'Q' will : Quit and exit the Zoo!")
+    console.log("Pressing 'A' will : Add a new animal to the Zoo!\n")
+    console.log("Pressing 'U' will : Update info on an animal to the Zoo!\n")
+    console.log("Pressing 'V' will : Visit the animals in the Zoo!\n")
+    console.log("Pressing 'D' will : Adopt an animal from the Zoo!\n")
+    console.log("Pressing 'Q' will : Quit and exit the Zoo!\n")
   },
 
   add : function(input_scope){
@@ -49,12 +49,12 @@ var zoo = {
   },
 
   visit : function(){
-    console.log(" Enter (I): ------> do you know the animal by it's id? We will visit that animal!")
-    console.log(" Enter (N): ------> do you know the animal by it's name? We will visit that animal!")
-    console.log(" Enter (A): ------> here's the count for all animals in all locations!")
-    console.log(" Enter (C): ------> here's the count for all animals in this one city!")    
-    console.log(" Enter (O): ------> here's the count for all the animals in all locations by the type you specified!")
-    console.log(" Enter (Q): ------> Quits to the main menu!")
+    console.log(" Enter (I): ------> do you know the animal by it's id? We will visit that animal!\n")
+    console.log(" Enter (N): ------> do you know the animal by it's name? We will visit that animal!\n")
+    console.log(" Enter (A): ------> here's the count for all animals in all locations!\n")
+    console.log(" Enter (C): ------> here's the count for all animals in this one city!\n")    
+    console.log(" Enter (O): ------> here's the count for all the animals in all locations by the type you specified!\n")
+    console.log(" Enter (Q): ------> Quits to the main menu!\n")
     currentScope.visit();
     currentScope.view(currentScope);
   },
