@@ -24,18 +24,20 @@ var zoo = {
     console.log("Welcome to the Zoo and Friends App!")
   };
   menu :function(){
-    cosole.log("Pressing 'A' will : Add a new animal to the Zoo!")
-    cosole.log("Pressing 'U' will : Update info on an animal to the Zoo!")
-    cosole.log("Pressing 'V' will : Visit the animals in the Zoo!")
-    cosole.log("Pressing 'D' will : Adopt an animal from the Zoo!")
-    cosole.log("Pressing 'Q' will : Quit and exit the Zoo!")
+    console.log("Pressing 'A' will : Add a new animal to the Zoo!")
+    console.log("Pressing 'U' will : Update info on an animal to the Zoo!")
+    console.log("Pressing 'V' will : Visit the animals in the Zoo!")
+    console.log("Pressing 'D' will : Adopt an animal from the Zoo!")
+    console.log("Pressing 'Q' will : Quit and exit the Zoo!")
   };
 
   add : function(input_scope){
     var currentScope = input_scope
     console.log("To add an animal to the zoo please fill out the following form for us!")
     prompt.get(["->", "name", "type", "age"], function(err, result){
-      prompt.get()
+      prompt.get(){
+        connection.query()
+      }
     })
 
     currentScope.menu();
