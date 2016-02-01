@@ -121,27 +121,45 @@ var zoo = {
   animID : function(input_scope){
     var currentScope = input_scope;
     prompt.get(["->", "animal_id"], function(err, result){
-      connection.query()
-    })
+      var query = "SELECT * FROM animals WHERE id=?"
+      var addThis = result.animal_id;
+      connection.query(query, addThis, function(err, result){
+        if (err) throw err;
+        console.log(result);
+        currentScope.visit();
+      });
+    });
   },
 
   name : function(input_scope){
     var currentScope = input_scope;
     prompt.get(["->", "name"], function(err, result){
-      connection.query()
+      var query = "SELECT * FROM animals WHERE name =?"
+      var addThis = result.animal_name;
+      connection.query(query, addThis, function(err, result){
+        if (err) throw err;
+        console.log(result);
+        currentScope.visit(;
+      })
     })
   },
 
   all : function(input_scope){
     var currentScope = input_scope;
-    prompt.get(["->", "all"], function(err, result){
-      connection.query()
+    var query = "SELECT COUNT(*) FROM animals"
+      connection.query(query, function(err, result){
+        if (err) throw err;
+        console.log(result);
+        currentScope.visit();
+      })
     })
   },
 
   update : function(input_scope){
     var currentScope = input_scope;
     prompt.get(['->', 'id', 'new_name', 'new_age', 'new_type', 'new_caretaker_id'], function(err, result){
+      var query = "UPDATE animals SET name=?, type=?, caretaker_id=?, age=?, WHERE id=?"
+      var addThis = [result.new_name, result.new_type, result.new_caretaker_id, result.new_age, result.id];
       connection.query(query, addThis, function(err, result){
         if(err) throw err;
         currentScope.menu();
